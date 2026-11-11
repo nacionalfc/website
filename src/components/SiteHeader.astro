@@ -1,3 +1,8 @@
+---
+const isHome = Astro.url.pathname === '/';
+const isNews = Astro.url.pathname.startsWith('/noticias');
+---
+
 <header class="site-header">
 	<div class="site-header__inner">
 		<a class="site-brand" href="/" aria-label="Nacional Futebol Clube — início">
@@ -8,8 +13,17 @@
 			</span>
 		</a>
 
-		<nav class="site-nav" aria-label="Navegação principal">
-			<a class="site-nav__link" href="/" aria-current="page">Início</a>
+		<nav class="site-nav site-nav--desktop" aria-label="Navegação principal">
+			<a class="site-nav__link" href="/" aria-current={isHome ? 'page' : undefined}>Início</a>
+			<a class="site-nav__link" href="/noticias/" aria-current={isNews ? 'page' : undefined}>Notícias</a>
 		</nav>
+
+		<details class="site-menu">
+			<summary class="site-menu__summary">Menu</summary>
+			<nav class="site-menu__links" aria-label="Navegação principal">
+				<a class="site-nav__link" href="/" aria-current={isHome ? 'page' : undefined}>Início</a>
+				<a class="site-nav__link" href="/noticias/" aria-current={isNews ? 'page' : undefined}>Notícias</a>
+			</nav>
+		</details>
 	</div>
 </header>

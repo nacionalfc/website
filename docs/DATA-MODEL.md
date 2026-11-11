@@ -32,10 +32,11 @@ Use individual JSON source files, validated with Zod/TypeScript. Pages CMS is no
 Initial schema decisions:
 - `title` — required string.
 - Slug — derived from the Markdown filename; do not duplicate it in frontmatter. Pages CMS creates filenames from the title and disables renaming to keep URLs stable.
+- Public route — `/noticias/{filename-slug}/`.
 - `publishedAt` — required date-only value in `YYYY-MM-DD` format. It represents the club's calendar date and is not a timestamp.
 - `updatedAt` — optional date-only value in `YYYY-MM-DD` format.
 - `summary` — required text, maximum 280 characters.
-- `draft` — boolean, defaults to `true`; public routes must exclude drafts.
+- `draft` — boolean, defaults to `true`; drafts are visible only in development and are excluded from production builds.
 - `featuredImage` — optional path to an approved image under `public/images/editorial/`.
 - `featuredImageAlt` — required when an image is set; an empty string is allowed for decorative images.
 - `body` — Markdown content.
@@ -45,11 +46,12 @@ Category and author/byline fields are deferred until the club approves category 
 ### Pages (fixed site pages)
 Initial schema decisions:
 - `title` — required string; the filename-derived slug is canonical.
+- Public route — `/{filename-slug}/`; the slug `noticias` is reserved for the news section.
 - `description` — required search/social summary, maximum 280 characters.
 - `heroImage` — optional path to an approved image under `public/images/editorial/`.
 - `heroImageAlt` — required when an image is set; an empty string is allowed for decorative images.
 - `order` — optional non-negative integer for display ordering.
-- `draft` — boolean, defaults to `true`; public routes must exclude drafts.
+- `draft` — boolean, defaults to `true`; drafts are visible only in development and are excluded from production builds.
 - `body` — Markdown content.
 
 Use approved, fact-checked content only. This collection can hold any fixed page, including institutional pages.

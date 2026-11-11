@@ -1,0 +1,53 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import Layout from '../layouts/Layout.astro';
+import { getVisiblePages } from '../lib/editorial';
+import '../styles/editorial.css';
+
+interface Props {
+	page: CollectionEntry<'pages'>;
+}
+
+export const getStaticPaths = (async () => {
+	const reservedSlugs = new Set(['noticias']);
+	const pages = await getVisiblePages();
+	const conflicts = pages.filter((page) => reservedSlugs.has(page.id));
+
+	if (conflicts.length > 0) {
+		throw new Error(
+			`Fixed page slug(s) ${conflicts.map(({ id }) => `"${id}"`).join(', ')} conflict with reserved routes.`,
+		);
+	}
+
+	return pages.map((page) => ({
+		params: { slug: page.id },
+		props: { page },
+	}));
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<Layout title={`${page.data.title} | Nacional Futebol Clube`} description={page.data.description}>
+	<main id="main-content" class="page-main" tabindex="-1">
+		<article>
+			<header class="article-header">
+				<h1>{page.data.title}</h1>
+			</header>
+
+			{page.data.heroImage && (
+				<img
+					class="article-image"
+					src={page.data.heroImage}
+					alt={page.data.heroImageAlt ?? ''}
+				/>
+			)}
+
+			<div class="article-body">
+				<Content />
+			</div>
+		</article>
+	</main>
+</Layout>

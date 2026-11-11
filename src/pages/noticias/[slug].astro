@@ -1,0 +1,57 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import { formatEditorialDate, getVisibleNews } from '../../lib/editorial';
+import '../../styles/editorial.css';
+
+interface Props {
+	article: CollectionEntry<'news'>;
+}
+
+export const getStaticPaths = (async () => {
+	const articles = await getVisibleNews();
+
+	return articles.map((article) => ({
+		params: { slug: article.id },
+		props: { article },
+	}));
+}) satisfies GetStaticPaths;
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+---
+
+<Layout title={`${article.data.title} | Nacional Futebol Clube`} description={article.data.summary}>
+	<main id="main-content" class="page-main" tabindex="-1">
+		<article>
+			<header class="article-header">
+				<h1>{article.data.title}</h1>
+				<p class="article-header__summary">{article.data.summary}</p>
+				<div class="article-meta">
+					<time datetime={article.data.publishedAt}>
+						Publicado em {formatEditorialDate(article.data.publishedAt)}
+					</time>
+					{article.data.updatedAt && (
+						<time datetime={article.data.updatedAt}>
+							Atualizado em {formatEditorialDate(article.data.updatedAt)}
+						</time>
+					)}
+				</div>
+			</header>
+
+			{article.data.featuredImage && (
+				<img
+					class="article-image"
+					src={article.data.featuredImage}
+					alt={article.data.featuredImageAlt ?? ''}
+					fetchpriority="high"
+				/>
+			)}
+
+			<div class="article-body">
+				<Content />
+			</div>
+		</article>
+	</main>
+</Layout>

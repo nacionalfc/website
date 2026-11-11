@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatEditorialDate } from '../lib/editorial';
+
+interface Props {
+	article: CollectionEntry<'news'>;
+}
+
+const { article } = Astro.props;
+---
+
+<article class="news-card">
+	{article.data.featuredImage && (
+		<div class="news-card__image-link">
+			<img
+				class="news-card__image"
+				src={article.data.featuredImage}
+				alt=""
+				loading="lazy"
+			/>
+		</div>
+	)}
+	<div class="news-card__content">
+		<time class="news-card__date" datetime={article.data.publishedAt}>
+			{formatEditorialDate(article.data.publishedAt)}
+		</time>
+		<h2 class="news-card__title">
+			<a href={`/noticias/${article.id}/`}>{article.data.title}</a>
+		</h2>
+		<p class="news-card__summary">{article.data.summary}</p>
+	</div>
+</article>

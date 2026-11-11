@@ -1,27 +1,12 @@
-.page-main {
-	width: min(100% - 2rem, var(--content-width));
-	margin-inline: auto;
-	padding-block: clamp(3rem, 10vw, 8rem);
-}
-
-.welcome-panel {
-	max-width: 52rem;
+.home-hero {
+	max-width: 58rem;
 	padding: clamp(1.5rem, 5vw, 3.5rem);
 	border-radius: var(--radius-large);
 	background: var(--color-brand-blue);
 	color: var(--color-on-brand);
 }
 
-.eyebrow {
-	margin: 0 0 1rem;
-	color: var(--color-brand-tint);
-	font-size: 0.8125rem;
-	font-weight: 700;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-}
-
-.welcome-panel h1 {
+.home-hero h1 {
 	max-width: 14ch;
 	margin: 0;
 	font-family: var(--font-display);
@@ -30,10 +15,72 @@
 	letter-spacing: -0.04em;
 }
 
-.welcome-panel__description {
-	max-width: 48ch;
-	margin: 1.5rem 0 0;
+.home-hero__intro {
+	max-width: 50ch;
+	margin: 1.25rem 0 0;
 	color: var(--color-brand-tint);
-	font-size: clamp(1rem, 2vw, 1.125rem);
+	font-size: clamp(1rem, 2vw, 1.2rem);
 	line-height: 1.6;
+}
+
+.home-hero__development-note {
+	margin: 1.5rem 0 0;
+	padding-top: 1rem;
+	border-top: 1px solid rgb(255 255 255 / 35%);
+	color: var(--color-brand-tint);
+	font-size: 0.875rem;
+}
+
+.home-section {
+	margin-top: clamp(3rem, 7vw, 5rem);
+}
+
+.home-section__heading {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0.75rem 1.5rem;
+	margin-bottom: 1.25rem;
+}
+
+.home-section__heading h2 {
+	margin: 0;
+	color: var(--color-brand-blue-dark);
+	font-size: clamp(1.5rem, 3vw, 2rem);
+	line-height: 1.2;
+}
+
+.home-section__heading a {
+	color: var(--color-brand-blue-dark);
+	font-size: 0.9375rem;
+	font-weight: 700;
+	text-underline-offset: 0.2em;
+}
+
+.page-link-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+	gap: 0.75rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.page-link-list a {
+	display: flex;
+	min-height: 4rem;
+	align-items: center;
+	padding: 1rem 1.25rem;
+	border: 1px solid var(--color-border);
+	border-radius: 0.75rem;
+	background: var(--color-surface);
+	color: var(--color-brand-blue-dark);
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.page-link-list a:hover {
+	border-color: var(--color-brand-blue);
+	background: var(--color-brand-tint);
 }

@@ -1,16 +1,52 @@
 ---
+import NewsCard from '../components/NewsCard.astro';
 import Layout from '../layouts/Layout.astro';
+import { getVisibleNews, getVisiblePages } from '../lib/editorial';
 import '../styles/home.css';
+import '../styles/editorial.css';
+import '../styles/news.css';
+
+const [news, pages] = await Promise.all([getVisibleNews(), getVisiblePages()]);
+const latestNews = news.slice(0, 3);
 ---
 
-<Layout>
+<Layout description="Notícias e páginas do Nacional Futebol Clube, de Manaus, Amazonas.">
 	<main id="main-content" class="page-main" tabindex="-1">
-		<section class="welcome-panel" aria-labelledby="page-title">
-			<p class="eyebrow">Site em desenvolvimento</p>
+		<section class="home-hero" aria-labelledby="page-title">
 			<h1 id="page-title">Nacional Futebol Clube</h1>
-			<p class="welcome-panel__description">
-				Conteúdo institucional aprovado será incluído nesta página.
-			</p>
+			<p class="home-hero__intro">Notícias e páginas do clube.</p>
+			{import.meta.env.DEV && (
+				<p class="home-hero__development-note">
+					Ambiente de desenvolvimento. Conteúdo ainda não publicado será incluído após aprovação.
+				</p>
+			)}
 		</section>
+
+		<section class="home-section" aria-labelledby="latest-news-title">
+			<div class="home-section__heading">
+				<h2 id="latest-news-title">Últimas notícias</h2>
+				<a href="/noticias/">Todas as notícias</a>
+			</div>
+			{latestNews.length > 0 ? (
+				<div class="news-list">
+					{latestNews.map((article) => <NewsCard article={article} />)}
+				</div>
+			) : (
+				<p class="empty-state">Ainda não há notícias publicadas.</p>
+			)}
+		</section>
+
+		{pages.length > 0 && (
+			<section class="home-section" aria-labelledby="site-pages-title">
+				<div class="home-section__heading">
+					<h2 id="site-pages-title">Páginas</h2>
+				</div>
+				<ul class="page-link-list">
+					{pages.map((page) => (
+						<li><a href={`/${page.id}/`}>{page.data.title}</a></li>
+					))}
+				</ul>
+			</section>
+		)}
 	</main>
 </Layout>
