@@ -1,4 +1,8 @@
 ---
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import '../styles/global.css';
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -21,13 +25,11 @@ const {
 		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+		<a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+		<div class="site-shell">
+			<SiteHeader />
+			<slot />
+			<SiteFooter />
+		</div>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-	}
-</style>

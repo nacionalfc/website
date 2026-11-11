@@ -32,6 +32,8 @@ Keep source brand assets in a clearly documented location such as `public/brand/
 - Avoid cluttered card grids, excessive gradients, gratuitous animation, and unnecessary carousels.
 - The result should feel like the club's own digital platform, not a generic theme.
 
+The initial implementation may use clearly labelled provisional blue and neutral CSS values to establish layout and contrast. These are development choices, not confirmed official colour codes, and should be reviewed against supplied identity guidance when available.
+
 ## 4. Typography
 
 Use official brand typography if specified and supplied. Otherwise propose a readable web-safe/hosted pairing for Tech Lead approval.
