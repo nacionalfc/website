@@ -1,0 +1,150 @@
+media:
+  - name: editorial-images
+    label: Imagens editoriais
+    input: public/images/editorial
+    output: /images/editorial
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, avif]
+    rename: safe
+    commit:
+      templates:
+        create: "content: add media {filename}"
+        update: "content: update media {filename}"
+        delete: "content: delete media {filename}"
+        rename: "content: rename media {oldFilename} to {newFilename}"
+
+content:
+  - name: news
+    label: Notícias
+    type: collection
+    path: src/content/news
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    operations:
+      rename: false
+    view:
+      primary: title
+      fields: [title, publishedAt, draft]
+      sort: [publishedAt, title]
+      default:
+        sort: publishedAt
+        order: desc
+    fields:
+      - name: title
+        label: Título
+        type: string
+        required: true
+        options:
+          maxlength: 120
+      - name: publishedAt
+        label: Data de publicação
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: updatedAt
+        label: Data de atualização
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: summary
+        label: Resumo
+        type: text
+        required: true
+        options:
+          maxlength: 280
+      - name: draft
+        label: Rascunho
+        type: boolean
+        default: true
+      - name: featuredImage
+        label: Imagem de destaque
+        type: image
+        options:
+          media: editorial-images
+          path: public/images/editorial/news
+          extensions: [jpg, jpeg, png, webp, avif]
+          rename: safe
+      - name: featuredImageAlt
+        label: Texto alternativo da imagem
+        description: Obrigatório quando houver imagem; deixe vazio se ela for decorativa.
+        type: string
+      - name: body
+        label: Conteúdo
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: editorial-images
+          path: public/images/editorial/news
+          extensions: [jpg, jpeg, png, webp, avif]
+          rename: safe
+
+  - name: pages
+    label: Páginas
+    type: collection
+    path: src/content/pages
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    operations:
+      rename: false
+    view:
+      primary: title
+      fields: [title, order, draft]
+      sort: [order, title]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Título
+        type: string
+        required: true
+        options:
+          maxlength: 120
+      - name: description
+        label: Descrição para mecanismos de busca
+        type: text
+        required: true
+        options:
+          maxlength: 280
+      - name: heroImage
+        label: Imagem de abertura
+        type: image
+        options:
+          media: editorial-images
+          path: public/images/editorial/pages
+          extensions: [jpg, jpeg, png, webp, avif]
+          rename: safe
+      - name: heroImageAlt
+        label: Texto alternativo da imagem
+        description: Obrigatório quando houver imagem; deixe vazio se ela for decorativa.
+        type: string
+      - name: order
+        label: Ordem de exibição
+        type: number
+        required: true
+        default: 0
+      - name: draft
+        label: Rascunho
+        type: boolean
+        default: true
+      - name: body
+        label: Conteúdo
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: editorial-images
+          path: public/images/editorial/pages
+          extensions: [jpg, jpeg, png, webp, avif]
+          rename: safe
+
+settings:
+  commit:
+    templates:
+      create: "content: add {path}"
+      update: "content: update {path}"
+      delete: "content: delete {path}"
+      rename: "content: rename {oldPath} to {newPath}"

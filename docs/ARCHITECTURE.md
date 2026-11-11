@@ -57,7 +57,7 @@ website/
 │   │   ├── layout/
 │   │   ├── home/
 │   │   ├── news/
-│   │   ├── institutional/
+│   │   ├── pages/
 │   │   └── ui/
 │   ├── content/
 │   │   ├── news/
@@ -94,9 +94,9 @@ Astro pages/components may call domain functions at build time. Domain calculati
 
 Use Astro Content Collections for editorial content where appropriate. Define explicit schemas and validate frontmatter. News and institutional content should use Markdown/MDX only if there is a demonstrated need for MDX components; prefer Markdown for ordinary editorial writing.
 
-Potential collections:
+Initial collections:
 - `news`
-- `institutional`
+- `pages` for fixed site pages, including institutional pages.
 
 Player profiles may later be a collection or structured records, but this should be decided when that feature is scoped. Do not prematurely commit to a CMS editing model for sports data.
 
@@ -112,7 +112,9 @@ The `.pages.yml` configuration must:
 - Avoid asking editors to enter derived values.
 - Be validated against current Pages CMS documentation and actual UI behaviour before acceptance.
 
-The small editorial team needs appropriate GitHub repository access. Confirm whether direct commits to the production branch or a review branch/PR workflow is appropriate before launch. Do not assume GitHub permissions map perfectly to CMS roles.
+The publishing decision is to commit editorial changes directly to the production branch. Pages CMS reads configuration per branch, so editors must select the production branch when working in the CMS; `.pages.yml` does not redirect writes to another branch. Confirm the production branch name and GitHub App access when connecting the repository. Do not assume GitHub permissions map perfectly to CMS roles.
+
+New news and page entries default to draft status. Public routes must filter out drafts. The frontmatter schema and CMS fields are documented in `docs/DATA-MODEL.md` and configured in `src/content.config.ts` and `.pages.yml`.
 
 ## 7. Styling and UI
 

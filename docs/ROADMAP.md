@@ -44,7 +44,7 @@ The phases below are proposed delivery slices, not fixed dates. The Tech Lead co
 ## Phase 2 — MVP content and pages
 
 ### Work
-- Configure Astro content collections for news and institutional content.
+- Configure Astro content collections for news and fixed pages.
 - Configure Pages CMS collections and media handling.
 - Build homepage.
 - Build news index and article template.

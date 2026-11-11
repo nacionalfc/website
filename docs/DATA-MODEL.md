@@ -29,33 +29,30 @@ Use individual JSON source files, validated with Zod/TypeScript. Pages CMS is no
 ## 3. Editorial content conventions
 
 ### News
-Suggested fields:
+Initial schema decisions:
 - `title` — required string.
-- `slug` — stable URL slug, or derive from filename using a documented convention.
-- `publishedAt` — ISO 8601 timestamp with explicit offset, or a clearly documented date-only convention.
-- `updatedAt` — optional timestamp.
-- `summary` — short editorial summary.
-- `category` — controlled string/enum once categories are agreed.
-- `author` — approved author/byline.
-- `featuredImage` — path to approved image.
-- `featuredImageAlt` — meaningful alternative text.
-- `draft` — boolean, if supported by the publishing workflow.
+- Slug — derived from the Markdown filename; do not duplicate it in frontmatter. Pages CMS creates filenames from the title and disables renaming to keep URLs stable.
+- `publishedAt` — required date-only value in `YYYY-MM-DD` format. It represents the club's calendar date and is not a timestamp.
+- `updatedAt` — optional date-only value in `YYYY-MM-DD` format.
+- `summary` — required text, maximum 280 characters.
+- `draft` — boolean, defaults to `true`; public routes must exclude drafts.
+- `featuredImage` — optional path to an approved image under `public/images/editorial/`.
+- `featuredImageAlt` — required when an image is set; an empty string is allowed for decorative images.
 - `body` — Markdown content.
 
-Avoid duplicate sources for the slug. Decide whether the filename or frontmatter is canonical and enforce it.
+Category and author/byline fields are deferred until the club approves category values and byline conventions.
 
-### Institutional pages
-Suggested fields:
-- `title`
-- `slug`
-- `description`
-- `heroImage` (optional)
-- `heroImageAlt` (optional)
-- `order` (optional, for navigation/list ordering)
-- `draft`
-- `body`
+### Pages (fixed site pages)
+Initial schema decisions:
+- `title` — required string; the filename-derived slug is canonical.
+- `description` — required search/social summary, maximum 280 characters.
+- `heroImage` — optional path to an approved image under `public/images/editorial/`.
+- `heroImageAlt` — required when an image is set; an empty string is allowed for decorative images.
+- `order` — optional non-negative integer for display ordering.
+- `draft` — boolean, defaults to `true`; public routes must exclude drafts.
+- `body` — Markdown content.
 
-Use approved, fact-checked institutional material only.
+Use approved, fact-checked content only. This collection can hold any fixed page, including institutional pages.
 
 ### Players (later phase)
 Do not assume player profiles belong in the initial launch. When implemented, separate editorial biography/profile data from match-derived statistics. Avoid manually storing totals that can be derived from match records.
@@ -136,7 +133,7 @@ The club's local time zone is `America/Manaus` (UTC-4).
 - Store match kickoff timestamps with explicit offsets, or use UTC consistently and convert for display.
 - Do not store ambiguous local timestamps without a timezone convention.
 - Display fixture times in the club's local timezone unless product requirements say otherwise.
-- Editorial publication dates should use a consistent, documented convention.
+- Editorial publication dates use date-only `YYYY-MM-DD` values. They represent calendar dates and must not be converted through a visitor's timezone.
 - Test date formatting around timezone boundaries.
 
 ## 7. Validation
