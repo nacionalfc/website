@@ -1,46 +1,47 @@
-# Astro Starter Kit: Basics
+# Site Oficial - Nacional Futebol Clube
+
+Website estático do Nacional Futebol Clube, de Manaus, Amazonas. 
+
+Este projeto usa Astro com TypeScript estrito e tem como objetivos iniciais as páginas institucionais e editoriais.
+
+## Requisitos
+
+- Node.js `>=22.23.4`
+- npm
+
+## Desenvolvimento
+
+Instale as dependências e inicie o servidor Astro em segundo plano:
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+O servidor local usa `http://localhost:4321` por padrão. Para consultar ou gerir o processo:
 
-## 🚀 Project Structure
+```sh
+npx astro dev status
+npx astro dev logs
+npx astro dev stop
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+## Comandos
+
+| Comando | Finalidade |
+| --- | --- |
+| `npm run dev` | Inicia o servidor local em segundo plano |
+| `npm run build` | Gera o site estático em `dist/` |
+| `npm run preview` | Pré-visualiza o build localmente |
+| `npm run astro -- --help` | Mostra a ajuda do Astro CLI |
+
+## Estrutura atual
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+├── docs/          # Escopo, arquitetura, modelo de dados, design e roadmap
+├── public/        # Arquivos públicos e assets aprovados
+├── src/layouts/   # Estrutura comum das páginas
+└── src/pages/     # Rotas do site
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+O conteúdo atual da página inicial é um placeholder de desenvolvimento. Não publique conteúdo factual sem aprovação do clube. A arquitetura e as decisões do projeto estão documentadas em `docs/`.
