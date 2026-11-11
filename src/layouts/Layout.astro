@@ -7,12 +7,27 @@ import '../styles/site-shell.css';
 interface Props {
 	title?: string;
 	description?: string;
+	openGraphType?: 'website' | 'article';
+	image?: string;
+	imageAlt?: string;
 }
 
 const {
 	title = 'Nacional Futebol Clube',
 	description = 'Website do Nacional Futebol Clube, de Manaus, Amazonas.',
+	openGraphType = 'website',
+	image,
+	imageAlt,
 } = Astro.props;
+
+const siteUrl = Astro.site;
+
+if (!siteUrl) {
+	throw new Error('Set the production site URL in astro.config.mjs to generate canonical metadata.');
+}
+
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const socialImageUrl = image ? new URL(image, siteUrl).href : undefined;
 ---
 
 <!doctype html>
@@ -21,7 +36,22 @@ const {
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalUrl} />
 		<link rel="icon" type="image/png" href="/images/favicon.png" />
+		<link rel="sitemap" href="/sitemap.xml" />
+		<meta property="og:site_name" content="Nacional Futebol Clube" />
+		<meta property="og:locale" content="pt_BR" />
+		<meta property="og:type" content={openGraphType} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		{socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
+		{socialImageUrl && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+		<meta name="twitter:card" content={socialImageUrl ? 'summary_large_image' : 'summary'} />
+		<meta name="twitter:site" content="@nacional1913" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		{socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>

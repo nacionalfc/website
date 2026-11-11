@@ -30,7 +30,12 @@ const { page } = Astro.props;
 const { Content } = await render(page);
 ---
 
-<Layout title={`${page.data.title} | Nacional Futebol Clube`} description={page.data.description}>
+<Layout
+	title={`${page.data.title} | Nacional Futebol Clube`}
+	description={page.data.description}
+	image={page.data.heroImage}
+	imageAlt={page.data.heroImageAlt}
+>
 	<main id="main-content" class="page-main" tabindex="-1">
 		<article>
 			<header class="article-header">

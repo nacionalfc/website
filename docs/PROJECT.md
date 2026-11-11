@@ -33,7 +33,7 @@ The implementation is an original Astro theme. WP Club Manager and its Victory t
 - News index/listing.
 - Individual news article pages.
 - Institutional pages, initially including club history and other approved information.
-- Contact information and official social links, once supplied.
+- Contact information once supplied; provisional social profile links use the owner-provided `nacional1913` handle.
 - Responsive global header, navigation, and footer.
 - Pages CMS editorial workflow for news and agreed institutional content.
 - SEO metadata, canonical URLs, Open Graph/social metadata, sitemap, and robots configuration.

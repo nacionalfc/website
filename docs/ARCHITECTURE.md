@@ -164,6 +164,8 @@ The precise output structure and whether generated resources live in `public/` o
 - Structured data only where accurate and appropriate.
 - Descriptive, stable URLs.
 
+The configured `site` URL in `astro.config.mjs` is the canonical host. The shared layout emits canonical and Open Graph/Twitter metadata. Article and fixed-page images are used as social preview images only when supplied in approved editorial content. `sitemap.xml` and `robots.txt` are generated as static endpoints from public routes and the configured site URL. Provisional social profile links are centralized in `src/data/social-links.ts` and should be verified before launch.
+
 ## 11. Architecture decision process
 
 Any material change to framework, rendering mode, CMS, hosting, persistence, or data contracts requires Tech Lead approval. Record significant approved changes in this document or a dedicated Architecture Decision Record under `docs/decisions/`.

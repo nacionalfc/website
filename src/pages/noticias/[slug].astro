@@ -22,7 +22,13 @@ const { article } = Astro.props;
 const { Content } = await render(article);
 ---
 
-<Layout title={`${article.data.title} | Nacional Futebol Clube`} description={article.data.summary}>
+<Layout
+	title={`${article.data.title} | Nacional Futebol Clube`}
+	description={article.data.summary}
+	openGraphType="article"
+	image={article.data.featuredImage}
+	imageAlt={article.data.featuredImageAlt}
+>
 	<main id="main-content" class="page-main" tabindex="-1">
 		<article>
 			<header class="article-header">

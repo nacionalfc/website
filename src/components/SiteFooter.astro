@@ -1,6 +1,21 @@
+---
+import { socialLinks } from '../data/social-links.ts';
+---
+
 <footer class="site-footer">
 	<div class="site-footer__inner">
-		<p class="site-footer__name">Nacional Futebol Clube</p>
-		<p class="site-footer__note">Manaus, Amazonas · Site em desenvolvimento</p>
+		<div class="site-footer__identity">
+			<p class="site-footer__name">Nacional Futebol Clube</p>
+			<p class="site-footer__note">Manaus, Amazonas</p>
+			{import.meta.env.DEV && <p class="site-footer__development-note">Ambiente de desenvolvimento</p>}
+		</div>
+
+		<nav class="site-footer__social" aria-label="Redes sociais">
+			<ul>
+				{socialLinks.map((social) => (
+					<li><a href={social.href}>{social.name}</a></li>
+				))}
+			</ul>
+		</nav>
 	</div>
 </footer>
