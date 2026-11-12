@@ -26,7 +26,8 @@ Keep source brand assets in a clearly documented location such as `public/brand/
 - Official blue is `#173E7D`, sampled from the supplied favicon. White (`#FFFFFF`) is the secondary interface colour.
 - Darker and lighter blues may support hierarchy and contrast, but should not be presented as additional official identity values.
 - Use a Victory-informed, editorial-first layout: a clear club identity header, prominent navigation, a lead story, and recent news. Adapt its information hierarchy rather than copying its WordPress theme or assets.
-- The current shell uses a white identity header with a royal-blue navigation band. Navigation includes Home, News, and a data-driven Pages menu when published fixed pages exist.
+- The current shell uses a royal-blue identity header and darker navigation band on larger screens. On mobile, use a single-row crest, short club name, and menu button; the expanded menu lists one link per row.
+- Larger-screen primary navigation includes Home, News, Club, Elenco, Jogos, and Competições, with an Institutional dropdown for the remaining fixed pages.
 - On the homepage, feature the latest visible news article when available. When the site has no published news, show the club identity and a restrained development notice only in development builds.
 - On the news index, give the first article a lead treatment, followed by a responsive article grid/list. Do not add match, standings, player, or other sports widgets until those features and verified data are in scope.
 - Use white and neutral surfaces to support readability.

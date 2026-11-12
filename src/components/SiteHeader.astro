@@ -4,6 +4,12 @@ import { getVisiblePages } from '../lib/editorial';
 const isHome = Astro.url.pathname === '/';
 const isNews = Astro.url.pathname.startsWith('/noticias');
 const pageLinks = await getVisiblePages();
+const clubPage = pageLinks.find((page) => page.id === 'clube');
+const footballSlugs = new Set(['elenco', 'jogos-e-resultados', 'competicoes']);
+const footballPages = pageLinks.filter((page) => footballSlugs.has(page.id));
+const institutionalPages = pageLinks.filter((page) => page.id !== 'clube' && !footballSlugs.has(page.id));
+
+const isCurrentPage = (slug: string) => Astro.url.pathname === `/${slug}/`;
 ---
 
 <header class="site-header">
@@ -11,25 +17,99 @@ const pageLinks = await getVisiblePages();
 		<a class="site-brand" href="/" aria-label="Nacional Futebol Clube — início">
 			<img src="/images/nacional-am.png" width="64" height="64" alt="" />
 			<span class="site-brand__text">
-				<span class="site-brand__name">Nacional Futebol Clube</span>
-				<span class="site-brand__location">Manaus, Amazonas</span>
+				<span class="site-brand__name">
+					<span class="site-brand__name-full">Nacional Futebol Clube</span>
+					<span class="site-brand__name-short">Nacional FC</span>
+				</span>
 			</span>
 		</a>
 
+		<details class="site-mobile-menu" id="mobile-menu" data-dismiss-on-outside>
+			<summary class="site-mobile-menu__toggle" aria-label="Menu principal">
+				<span class="site-mobile-menu__icon" aria-hidden="true">
+					<span></span>
+					<span></span>
+					<span></span>
+				</span>
+			</summary>
+			<nav class="site-mobile-menu__panel" aria-label="Navegação principal">
+				<a href="/" aria-current={isHome ? 'page' : undefined}>Início</a>
+				<a href="/noticias/" aria-current={isNews ? 'page' : undefined}>Notícias</a>
+				{clubPage && (
+					<a href={`/${clubPage.id}/`} aria-current={isCurrentPage(clubPage.id) ? 'page' : undefined}>
+						{clubPage.data.title}
+					</a>
+				)}
+				{footballPages.map((page) => (
+					<a href={`/${page.id}/`} aria-current={isCurrentPage(page.id) ? 'page' : undefined}>
+						{page.data.title}
+					</a>
+				))}
+				{institutionalPages.length > 0 && (
+					<>
+						<p class="site-mobile-menu__group">Institucional</p>
+						{institutionalPages.map((page) => (
+							<a href={`/${page.id}/`} aria-current={isCurrentPage(page.id) ? 'page' : undefined}>
+								{page.data.title}
+							</a>
+						))}
+					</>
+				)}
+			</nav>
+		</details>
 	</div>
 
 	<nav class="site-nav" aria-label="Navegação principal">
 		<div class="site-nav__inner">
 			<a class="site-nav__link" href="/" aria-current={isHome ? 'page' : undefined}>Início</a>
 			<a class="site-nav__link" href="/noticias/" aria-current={isNews ? 'page' : undefined}>Notícias</a>
-			{pageLinks.length > 0 && (
-				<details class="site-nav__pages">
-					<summary class="site-nav__link">Páginas</summary>
+			{clubPage && (
+				<a class="site-nav__link" href={`/${clubPage.id}/`} aria-current={isCurrentPage(clubPage.id) ? 'page' : undefined}>
+					{clubPage.data.title}
+				</a>
+			)}
+			{footballPages.map((page) => (
+				<a class="site-nav__link" href={`/${page.id}/`} aria-current={isCurrentPage(page.id) ? 'page' : undefined}>
+					{page.data.title}
+				</a>
+			))}
+			{institutionalPages.length > 0 && (
+				<details class="site-nav__pages" id="institutional-menu" data-dismiss-on-outside>
+					<summary class="site-nav__link">Institucional</summary>
 					<div class="site-nav__page-links">
-						{pageLinks.map((page) => <a href={`/${page.id}/`}>{page.data.title}</a>)}
+						{institutionalPages.map((page) => (
+							<a href={`/${page.id}/`} aria-current={isCurrentPage(page.id) ? 'page' : undefined}>
+								{page.data.title}
+							</a>
+						))}
 					</div>
 				</details>
 			)}
 		</div>
 	</nav>
 </header>
+
+<script>
+	const dismissibleMenus = document.querySelectorAll<HTMLDetailsElement>('[data-dismiss-on-outside]');
+
+	if (dismissibleMenus.length > 0) {
+		document.addEventListener('click', (event) => {
+			if (!(event.target instanceof Node)) return;
+
+			dismissibleMenus.forEach((menu) => {
+				if (!menu.contains(event.target as Node)) menu.open = false;
+			});
+		});
+
+		document.addEventListener('keydown', (event) => {
+			if (event.key !== 'Escape') return;
+
+			dismissibleMenus.forEach((menu) => {
+				if (!menu.open) return;
+
+				menu.open = false;
+				menu.querySelector('summary')?.focus();
+			});
+		});
+	}
+</script>

@@ -56,6 +56,8 @@ Initial schema decisions:
 
 Use approved, fact-checked content only. This collection can hold any fixed page, including institutional pages.
 
+Draft-only overview pages may reserve routes for future football features such as the squad, fixtures, competitions, and statistics. They are editorial placeholders only; do not use Pages CMS to maintain player or match records. Replace these placeholder pages with feature-specific routes and validated data when those later phases are implemented.
+
 ### Players (later phase)
 Do not assume player profiles belong in the initial launch. When implemented, separate editorial biography/profile data from match-derived statistics. Avoid manually storing totals that can be derived from match records.
 
