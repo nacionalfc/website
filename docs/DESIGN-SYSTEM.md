@@ -23,7 +23,12 @@ Keep source brand assets in a clearly documented location such as `public/brand/
 
 ## 3. Visual direction
 
-- Royal blue and white are the principal identity colours.
+- Official blue is `#173E7D`, sampled from the supplied favicon. White (`#FFFFFF`) is the secondary interface colour.
+- Darker and lighter blues may support hierarchy and contrast, but should not be presented as additional official identity values.
+- Use a Victory-informed, editorial-first layout: a clear club identity header, prominent navigation, a lead story, and recent news. Adapt its information hierarchy rather than copying its WordPress theme or assets.
+- The current shell uses a white identity header with a royal-blue navigation band. Navigation includes Home, News, and a data-driven Pages menu when published fixed pages exist.
+- On the homepage, feature the latest visible news article when available. When the site has no published news, show the club identity and a restrained development notice only in development builds.
+- On the news index, give the first article a lead treatment, followed by a responsive article grid/list. Do not add match, standings, player, or other sports widgets until those features and verified data are in scope.
 - Use white and neutral surfaces to support readability.
 - Use blue for navigation, calls to action, selected states, and identity elements.
 - Use darker/lighter blue variants only where consistent with the supplied identity and contrast requirements.
@@ -31,8 +36,9 @@ Keep source brand assets in a clearly documented location such as `public/brand/
 - Prefer strong photography, confident typography, clear spacing, and restrained decoration.
 - Avoid cluttered card grids, excessive gradients, gratuitous animation, and unnecessary carousels.
 - The result should feel like the club's own digital platform, not a generic theme.
+- Keep crest colors and artwork unchanged; let the surrounding blue-and-white interface carry the primary club palette.
 
-The initial implementation may use clearly labelled provisional blue and neutral CSS values to establish layout and contrast. These are development choices, not confirmed official colour codes, and should be reviewed against supplied identity guidance when available.
+The blue and white values above are the approved digital palette for this implementation. Supporting blue shades and neutral surfaces are UI variations, not separate official brand colours.
 
 ## 4. Typography
 

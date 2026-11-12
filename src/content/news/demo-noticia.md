@@ -4,6 +4,8 @@ title: "EXEMPLO — Notícia Lorem Ipsum (não publicar)"
 publishedAt: "2026-11-11"
 summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 draft: true
+featuredImage: "/images/editorial/news/atacante-sassa.jpg"
+featuredImageAlt: "Atacante Sassá em campo com uniforme azul."
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat, magna at interdum interdum, lectus sapien malesuada ipsum, sed suscipit justo neque vitae enim. Integer blandit, sapien vel aliquam malesuada, purus lorem feugiat erat, vitae sodales ligula mi vel justo.

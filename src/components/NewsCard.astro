@@ -4,12 +4,13 @@ import { formatEditorialDate } from '../lib/editorial';
 
 interface Props {
 	article: CollectionEntry<'news'>;
+	featured?: boolean;
 }
 
-const { article } = Astro.props;
+const { article, featured = false } = Astro.props;
 ---
 
-<article class="news-card">
+<article class:list={['news-card', featured && 'news-card--featured', featured && article.data.featuredImage && 'news-card--has-image']}>
 	{article.data.featuredImage && (
 		<div class="news-card__image-link">
 			<img

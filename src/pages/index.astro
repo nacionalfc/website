@@ -1,43 +1,74 @@
 ---
 import NewsCard from '../components/NewsCard.astro';
 import Layout from '../layouts/Layout.astro';
-import { getVisibleNews, getVisiblePages } from '../lib/editorial';
+import { formatEditorialDate, getVisibleNews, getVisiblePages } from '../lib/editorial';
 import '../styles/home.css';
 import '../styles/editorial.css';
 import '../styles/news.css';
 
 const [news, pages] = await Promise.all([getVisibleNews(), getVisiblePages()]);
-const latestNews = news.slice(0, 3);
+const [featuredArticle] = news;
+const recentArticles = news.slice(1, 4);
 ---
 
 <Layout description="Notícias e páginas do Nacional Futebol Clube, de Manaus, Amazonas.">
 	<main id="main-content" class="page-main" tabindex="-1">
-		<section class="home-hero" aria-labelledby="page-title">
-			<h1 id="page-title">Nacional Futebol Clube</h1>
-			<p class="home-hero__intro">Notícias e páginas do clube.</p>
-			{import.meta.env.DEV && (
-				<p class="home-hero__development-note">
-					Ambiente de desenvolvimento. Conteúdo ainda não publicado será incluído após aprovação.
-				</p>
-			)}
-		</section>
+		{featuredArticle ? (
+			<section class="home-feature" aria-labelledby="page-title">
+				<div class="home-feature__content">
+					<p class="home-feature__eyebrow">Destaque</p>
+					<h1 id="page-title"><a href={`/noticias/${featuredArticle.id}/`}>{featuredArticle.data.title}</a></h1>
+					<p class="home-feature__summary">{featuredArticle.data.summary}</p>
+					<time class="home-feature__date" datetime={featuredArticle.data.publishedAt}>
+						{formatEditorialDate(featuredArticle.data.publishedAt)}
+					</time>
+					<a class="home-feature__action" href={`/noticias/${featuredArticle.id}/`}>Ler notícia</a>
+				</div>
+				<div class="home-feature__visual">
+					{featuredArticle.data.featuredImage ? (
+						<img
+							src={featuredArticle.data.featuredImage}
+							alt={featuredArticle.data.featuredImageAlt ?? ''}
+							fetchpriority="high"
+						/>
+					) : (
+						<div class="home-feature__crest">
+							<img src="/images/nacional-am.png" width="120" height="120" alt="" />
+							{import.meta.env.DEV && <span>Imagem ilustrativa de desenvolvimento</span>}
+						</div>
+					)}
+				</div>
+			</section>
+		) : (
+			<section class="home-hero" aria-labelledby="page-title">
+				<div class="home-hero__content">
+					<p class="home-feature__eyebrow">Website oficial</p>
+					<h1 id="page-title">Nacional Futebol Clube</h1>
+					<p class="home-hero__intro">Notícias e páginas do clube.</p>
+					{import.meta.env.DEV && (
+						<p class="home-hero__development-note">
+							Ambiente de desenvolvimento. Conteúdo ainda não publicado será incluído após aprovação.
+						</p>
+					)}
+				</div>
+				<div class="home-hero__crest" aria-hidden="true">
+					<img src="/images/nacional-am.png" width="144" height="144" alt="" />
+				</div>
+			</section>
+		)}
 
-		<section class="home-section" aria-labelledby="latest-news-title">
+		{recentArticles.length > 0 && <section class="home-section" aria-labelledby="latest-news-title">
 			<div class="home-section__heading">
-				<h2 id="latest-news-title">Últimas notícias</h2>
+				<h2 id="latest-news-title">Mais notícias</h2>
 				<a href="/noticias/">Todas as notícias</a>
 			</div>
-			{latestNews.length > 0 ? (
-				<div class="news-list">
-					{latestNews.map((article) => <NewsCard article={article} />)}
-				</div>
-			) : (
-				<p class="empty-state">Ainda não há notícias publicadas.</p>
-			)}
-		</section>
+			<div class="news-list">
+				{recentArticles.map((article) => <NewsCard article={article} />)}
+			</div>
+		</section>}
 
 		{pages.length > 0 && (
-			<section class="home-section" aria-labelledby="site-pages-title">
+			<section class="home-section" id="site-pages" aria-labelledby="site-pages-title">
 				<div class="home-section__heading">
 					<h2 id="site-pages-title">Páginas</h2>
 				</div>

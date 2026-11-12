@@ -18,7 +18,7 @@ content:
     label: Notícias
     type: collection
     path: src/content/news
-    exclude: [demo-noticia.md]
+    exclude: [demo-noticia.md, demo-noticia-2.md, demo-noticia-3.md, demo-noticia-4.md]
     format: yaml-frontmatter
     filename: "{primary}.md"
     subfolders: false
