@@ -1,5 +1,5 @@
 // Provisional club social handle supplied by the project owner; verify before launch.
-const socialHandle = 'nacional1913';
+const socialHandle = 'nacionalfc1913';
 
 export const socialLinks = [
 	{ name: 'Instagram', href: `https://www.instagram.com/${socialHandle}/` },
