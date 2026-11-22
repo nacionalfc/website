@@ -29,7 +29,7 @@ Keep source brand assets in a clearly documented location such as `public/brand/
 - The current shell uses a royal-blue identity header and darker navigation band on larger screens. On mobile, use a single-row crest, short club name, and menu button; the expanded menu lists one link per row.
 - Larger-screen primary navigation includes Home, News, Club, Elenco, Jogos, and Competições, with an Institutional dropdown for the remaining fixed pages.
 - On the homepage, feature the latest visible news article when available. When the site has no published news, show the club identity and a restrained development notice only in development builds.
-- On the news index, give the first article a lead treatment, followed by a responsive article grid/list. Do not add match, standings, player, or other sports widgets until those features and verified data are in scope.
+- On the news index, use a paginated vertical feed in the main column and reserve a right sidebar for future club widgets. Do not add match, standings, player, or other sports widgets until those features and verified data are in scope.
 - Use white and neutral surfaces to support readability.
 - Use blue for navigation, calls to action, selected states, and identity elements.
 - Use darker/lighter blue variants only where consistent with the supplied identity and contrast requirements.
@@ -88,11 +88,10 @@ Recommended hierarchy:
 Do not display empty future-match or statistics widgets in the MVP. Leave room in the component architecture for their later introduction.
 
 ### News listing
-- Clear page heading and introduction if approved.
-- Featured article where editorially selected.
-- Responsive article grid/list.
-- Category and publication date.
-- Pagination or another crawlable navigation approach when needed.
+- Use a two-column desktop layout: a vertical article feed and a right sidebar reserved for future widgets.
+- Do not use a hero or featured lead treatment on this page.
+- Each feed item may include a supplied image, publication date, headline, summary, and link to the full article.
+- Provide crawlable pagination and collapse the sidebar below the feed on smaller screens.
 - Clear empty state only if appropriate.
 
 ### News article

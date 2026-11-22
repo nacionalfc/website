@@ -28,7 +28,7 @@ export function formatEditorialDate(value: string): string {
 
 	return new Intl.DateTimeFormat('pt-BR', {
 		day: 'numeric',
-		month: 'long',
+		month: 'numeric',
 		year: 'numeric',
 		timeZone: 'UTC',
 	}).format(date);

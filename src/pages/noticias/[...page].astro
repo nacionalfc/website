@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths } from 'astro';
+import NewsArchive from '../../components/news/NewsArchive.astro';
+import { getVisibleNews } from '../../lib/editorial';
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const articles = await getVisibleNews();
+
+	return paginate(articles, {
+		pageSize: 10,
+		format: (url) => (url.endsWith('/') ? url : `${url}/`),
+	});
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<NewsArchive page={page} />

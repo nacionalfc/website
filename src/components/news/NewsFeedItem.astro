@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatEditorialDate, getNewsPath } from '../../lib/editorial';
+
+interface Props {
+	article: CollectionEntry<'news'>;
+}
+
+const { article } = Astro.props;
+const articlePath = getNewsPath(article);
+---
+
+<article class="news-feed-item">
+	{article.data.featuredImage && (
+		<a class="news-feed-item__image-link" href={articlePath} tabindex="-1" aria-hidden="true">
+			<img
+				class="news-feed-item__image"
+				src={article.data.featuredImage}
+				alt=""
+				loading="lazy"
+			/>
+		</a>
+	)}
+	<div class="news-feed-item__content">
+		<h2 class="news-feed-item__title"><a href={articlePath}>{article.data.title}</a></h2>
+		<time class="news-feed-item__date" datetime={article.data.publishedAt}>
+			{formatEditorialDate(article.data.publishedAt)}
+		</time>
+		<p class="news-feed-item__summary">{article.data.summary}</p>
+		<a class="news-feed-item__action" href={articlePath}>Ler mais</a>
+	</div>
+</article>

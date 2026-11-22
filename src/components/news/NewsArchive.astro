@@ -1,0 +1,48 @@
+---
+import type { Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import NewsFeedItem from './NewsFeedItem.astro';
+import '../../styles/editorial.css';
+import '../../styles/news.css';
+
+interface Props {
+	page: Page<CollectionEntry<'news'>>;
+}
+
+const { page } = Astro.props;
+const title = page.currentPage === 1 ? 'Notícias' : `Notícias — página ${page.currentPage}`;
+---
+
+<Layout title={`${title} | Nacional Futebol Clube`} description="Notícias publicadas pelo Nacional Futebol Clube.">
+	<main id="main-content" class="page-main news-archive" tabindex="-1">
+		<div class="news-archive__layout">
+			<section class="news-archive__feed" aria-labelledby="news-archive-title">
+				<h2 id="news-archive-title">Notícias</h2>
+
+				{page.data.length > 0 ? (
+					<>
+						<div class="news-feed">
+							{page.data.map((article) => <NewsFeedItem article={article} />)}
+						</div>
+
+						{page.lastPage > 1 && (
+							<nav class="news-pagination" aria-label="Paginação de notícias">
+								{page.url.prev ? <a href={page.url.prev}>Notícias mais recentes</a> : <span></span>}
+								<p>Página {page.currentPage} de {page.lastPage}</p>
+								{page.url.next ? <a href={page.url.next}>Notícias anteriores</a> : <span></span>}
+							</nav>
+						)}
+					</>
+				) : (
+					<p class="empty-state">Ainda não há notícias publicadas.</p>
+				)}
+			</section>
+
+			<aside class="news-archive__sidebar" aria-labelledby="news-sidebar-title">
+				<h2 id="news-sidebar-title">Próximos Jogos</h2>
+				<p>Não há partidas agendadas.</p>
+			</aside>
+		</div>
+	</main>
+</Layout>
