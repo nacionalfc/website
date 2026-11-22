@@ -1,9 +1,9 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
-import Layout from '../../layouts/Layout.astro';
-import { formatEditorialDate, getVisibleNews } from '../../lib/editorial';
-import '../../styles/editorial.css';
+import Layout from '../../../../layouts/Layout.astro';
+import { formatEditorialDate, getVisibleNews } from '../../../../lib/editorial';
+import '../../../../styles/editorial.css';
 
 interface Props {
 	article: CollectionEntry<'news'>;
@@ -13,7 +13,11 @@ export const getStaticPaths = (async () => {
 	const articles = await getVisibleNews();
 
 	return articles.map((article) => ({
-		params: { slug: article.id },
+		params: {
+			year: article.data.publishedAt.slice(0, 4),
+			month: article.data.publishedAt.slice(5, 7),
+			slug: article.id,
+		},
 		props: { article },
 	}));
 }) satisfies GetStaticPaths;

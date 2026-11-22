@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getVisibleNews, getVisiblePages } from '../lib/editorial';
+import { getNewsPath, getVisibleNews, getVisiblePages } from '../lib/editorial';
 
 const escapeXml = (value: string): string =>
 	value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ site }) => {
 	const urls = [
 		new URL('/', site).href,
 		new URL('/noticias/', site).href,
-		...articles.map((article) => new URL(`/noticias/${article.id}/`, site).href),
+		...articles.map((article) => new URL(getNewsPath(article), site).href),
 		...pages.map((page) => new URL(`/${page.id}/`, site).href),
 	];
 

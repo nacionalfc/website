@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { formatEditorialDate } from '../lib/editorial';
+import { formatEditorialDate, getNewsPath } from '../lib/editorial';
 
 interface Props {
 	article: CollectionEntry<'news'>;
@@ -26,7 +26,7 @@ const { article, featured = false } = Astro.props;
 			{formatEditorialDate(article.data.publishedAt)}
 		</time>
 		<h2 class="news-card__title">
-			<a href={`/noticias/${article.id}/`}>{article.data.title}</a>
+			<a href={getNewsPath(article)}>{article.data.title}</a>
 		</h2>
 		<p class="news-card__summary">{article.data.summary}</p>
 	</div>

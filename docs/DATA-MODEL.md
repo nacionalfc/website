@@ -31,8 +31,8 @@ Use individual JSON source files, validated with Zod/TypeScript. Pages CMS is no
 ### News
 Initial schema decisions:
 - `title` — required string.
-- Slug — derived from the Markdown filename; do not duplicate it in frontmatter. Pages CMS creates filenames from the title and disables renaming to keep URLs stable.
-- Public route — `/noticias/{filename-slug}/`.
+- Slug — derived from the Markdown filename; do not duplicate it in frontmatter. Pages CMS creates filenames from the title and disables renaming.
+- Public route — `/noticias/{year}/{month}/{filename-slug}/`, where year and month are derived from `publishedAt`. Changing `publishedAt` changes the URL.
 - `publishedAt` — required date-only value in `YYYY-MM-DD` format. It represents the club's calendar date and is not a timestamp.
 - `updatedAt` — optional date-only value in `YYYY-MM-DD` format.
 - `summary` — required text, maximum 280 characters.

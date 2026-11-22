@@ -1,8 +1,8 @@
 ---
 # Página provisória de desenvolvimento; revisar antes de publicar.
-title: "Jogos e resultados"
+title: "Jogos e Resultados"
 description: "Calendário e resultados do Nacional Futebol Clube."
-order: 11
+order: 0
 draft: true
 ---
 

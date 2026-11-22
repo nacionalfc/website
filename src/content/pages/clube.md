@@ -2,7 +2,7 @@
 # Página provisória de desenvolvimento; revisar antes de publicar.
 title: "Clube"
 description: "Informações institucionais do Nacional Futebol Clube."
-order: 0
+order: 11
 draft: true
 ---
 

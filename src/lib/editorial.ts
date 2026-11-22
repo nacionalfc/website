@@ -6,6 +6,13 @@ export async function getVisibleNews(): Promise<CollectionEntry<'news'>[]> {
 	return entries.sort((left, right) => right.data.publishedAt.localeCompare(left.data.publishedAt));
 }
 
+export function getNewsPath(article: CollectionEntry<'news'>): string {
+	const year = article.data.publishedAt.slice(0, 4);
+	const month = article.data.publishedAt.slice(5, 7);
+
+	return `/noticias/${year}/${month}/${article.id}/`;
+}
+
 export async function getVisiblePages(): Promise<CollectionEntry<'pages'>[]> {
 	const entries = await getCollection('pages', ({ data }) => import.meta.env.DEV || !data.draft);
 

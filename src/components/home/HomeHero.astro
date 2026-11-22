@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatEditorialDate, getNewsPath } from '../../lib/editorial';
+
+interface Props {
+	featuredArticle?: CollectionEntry<'news'>;
+}
+
+const { featuredArticle } = Astro.props;
+---
+
+{featuredArticle ? (
+	<section class="home-feature" aria-labelledby="page-title">
+		<div class="home-feature__content">
+			<p class="home-feature__eyebrow">Em Destaque</p>
+			<h1 id="page-title">
+				<a href={getNewsPath(featuredArticle)}>{featuredArticle.data.title}</a>
+			</h1>
+			<p class="home-feature__summary">{featuredArticle.data.summary}</p>
+			<time class="home-feature__date" datetime={featuredArticle.data.publishedAt}>
+				{formatEditorialDate(featuredArticle.data.publishedAt)}
+			</time>
+			<a class="home-feature__action" href={getNewsPath(featuredArticle)}>Ler notícia</a>
+		</div>
+		<div class="home-feature__visual">
+			{featuredArticle.data.featuredImage ? (
+				<img
+					src={featuredArticle.data.featuredImage}
+					alt={featuredArticle.data.featuredImageAlt ?? ''}
+					fetchpriority="high"
+				/>
+			) : (
+				<div class="home-feature__crest">
+					<img src="/images/nacional-am.png" width="120" height="120" alt="" />
+					{import.meta.env.DEV && <span>Imagem ilustrativa de desenvolvimento</span>}
+				</div>
+			)}
+		</div>
+	</section>
+) : (
+	<section class="home-hero" aria-labelledby="page-title">
+		<div class="home-hero__content">
+			<p class="home-feature__eyebrow">Website oficial</p>
+			<h1 id="page-title">Nacional Futebol Clube</h1>
+			<p class="home-hero__intro">Notícias e páginas do clube.</p>
+			{import.meta.env.DEV && (
+				<p class="home-hero__development-note">
+					Ambiente de desenvolvimento. Conteúdo ainda não publicado será incluído após aprovação.
+				</p>
+			)}
+		</div>
+		<div class="home-hero__crest" aria-hidden="true">
+			<img src="/images/nacional-am.png" width="144" height="144" alt="" />
+		</div>
+	</section>
+)}

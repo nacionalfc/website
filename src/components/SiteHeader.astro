@@ -35,16 +35,16 @@ const isCurrentPage = (slug: string) => Astro.url.pathname === `/${slug}/`;
 			<nav class="site-mobile-menu__panel" aria-label="Navegação principal">
 				<a href="/" aria-current={isHome ? 'page' : undefined}>Início</a>
 				<a href="/noticias/" aria-current={isNews ? 'page' : undefined}>Notícias</a>
-				{clubPage && (
-					<a href={`/${clubPage.id}/`} aria-current={isCurrentPage(clubPage.id) ? 'page' : undefined}>
-						{clubPage.data.title}
-					</a>
-				)}
 				{footballPages.map((page) => (
 					<a href={`/${page.id}/`} aria-current={isCurrentPage(page.id) ? 'page' : undefined}>
 						{page.data.title}
 					</a>
 				))}
+				{clubPage && (
+					<a href={`/${clubPage.id}/`} aria-current={isCurrentPage(clubPage.id) ? 'page' : undefined}>
+						{clubPage.data.title}
+					</a>
+				)}
 				{institutionalPages.length > 0 && (
 					<>
 						<p class="site-mobile-menu__group">Institucional</p>
@@ -63,16 +63,16 @@ const isCurrentPage = (slug: string) => Astro.url.pathname === `/${slug}/`;
 		<div class="site-nav__inner">
 			<a class="site-nav__link" href="/" aria-current={isHome ? 'page' : undefined}>Início</a>
 			<a class="site-nav__link" href="/noticias/" aria-current={isNews ? 'page' : undefined}>Notícias</a>
-			{clubPage && (
-				<a class="site-nav__link" href={`/${clubPage.id}/`} aria-current={isCurrentPage(clubPage.id) ? 'page' : undefined}>
-					{clubPage.data.title}
-				</a>
-			)}
 			{footballPages.map((page) => (
 				<a class="site-nav__link" href={`/${page.id}/`} aria-current={isCurrentPage(page.id) ? 'page' : undefined}>
 					{page.data.title}
 				</a>
 			))}
+			{clubPage && (
+				<a class="site-nav__link" href={`/${clubPage.id}/`} aria-current={isCurrentPage(clubPage.id) ? 'page' : undefined}>
+					{clubPage.data.title}
+				</a>
+			)}
 			{institutionalPages.length > 0 && (
 				<details class="site-nav__pages" id="institutional-menu" data-dismiss-on-outside>
 					<summary class="site-nav__link">Institucional</summary>

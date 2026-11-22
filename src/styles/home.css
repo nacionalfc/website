@@ -29,10 +29,10 @@
 
 .home-feature h1,
 .home-hero h1 {
-	max-width: 16ch;
+	/* max-width: 16ch; */
 	margin: 0;
 	font-family: var(--font-display);
-	font-size: clamp(2.25rem, 5.3vw, 4.25rem);
+	font-size: clamp(2.25rem, 5.3vw, 2.25rem);
 	line-height: 1.04;
 	letter-spacing: -0.04em;
 }
