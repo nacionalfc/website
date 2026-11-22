@@ -1,7 +1,9 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 
+export const isPreviewBuild = import.meta.env.DEV || import.meta.env.WORKERS_CI_BRANCH === 'dev';
+
 export async function getVisibleNews(): Promise<CollectionEntry<'news'>[]> {
-	const entries = await getCollection('news', ({ data }) => import.meta.env.DEV || !data.draft);
+	const entries = await getCollection('news', ({ data }) => isPreviewBuild || !data.draft);
 
 	return entries.sort((left, right) => right.data.publishedAt.localeCompare(left.data.publishedAt));
 }
@@ -14,7 +16,7 @@ export function getNewsPath(article: CollectionEntry<'news'>): string {
 }
 
 export async function getVisiblePages(): Promise<CollectionEntry<'pages'>[]> {
-	const entries = await getCollection('pages', ({ data }) => import.meta.env.DEV || !data.draft);
+	const entries = await getCollection('pages', ({ data }) => isPreviewBuild || !data.draft);
 
 	return entries.sort((left, right) => {
 		const orderDifference = (left.data.order ?? Number.MAX_SAFE_INTEGER) - (right.data.order ?? Number.MAX_SAFE_INTEGER);

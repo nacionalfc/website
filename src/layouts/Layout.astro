@@ -1,6 +1,7 @@
 ---
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import { isPreviewBuild } from '../lib/editorial';
 import '../styles/global.css';
 import '../styles/site-shell.css';
 
@@ -58,6 +59,11 @@ const socialImageUrl = image ? new URL(image, siteUrl).href : undefined;
 	<body>
 		<a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 		<div class="site-shell">
+			{isPreviewBuild && (
+				<div class="site-preview-banner" role="status">
+					Prévia para apresentação — conteúdo demonstrativo, não oficial.
+				</div>
+			)}
 			<SiteHeader />
 			<slot />
 			<SiteFooter />

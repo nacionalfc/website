@@ -114,7 +114,7 @@ The `.pages.yml` configuration must:
 
 The publishing decision is to commit editorial changes directly to the production branch. Pages CMS reads configuration per branch, so editors must select the production branch when working in the CMS; `.pages.yml` does not redirect writes to another branch. Confirm the production branch name and GitHub App access when connecting the repository. Do not assume GitHub permissions map perfectly to CMS roles.
 
-New news and page entries default to draft status. Public routes must filter out drafts. The frontmatter schema and CMS fields are documented in `docs/DATA-MODEL.md` and configured in `src/content.config.ts` and `.pages.yml`.
+New news and page entries default to draft status. Local development and Cloudflare Workers Builds for the `dev` branch show drafts; production builds filter them out. The preview layout displays a banner to identify its illustrative content. The frontmatter schema and CMS fields are documented in `docs/DATA-MODEL.md` and configured in `src/content.config.ts` and `.pages.yml`.
 
 ## 7. Styling and UI
 

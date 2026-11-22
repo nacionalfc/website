@@ -69,3 +69,14 @@ button:focus-visible {
 .skip-link:focus {
 	transform: translateY(0);
 }
+
+.site-preview-banner {
+	padding: 0.75rem 1rem;
+	background: var(--color-brand-blue-dark);
+	color: var(--color-on-brand);
+	font-size: 0.875rem;
+	font-weight: 700;
+	text-align: center;
+	position: fixed;
+    right: 0;
+}

@@ -36,7 +36,7 @@ Initial schema decisions:
 - `publishedAt` — required date-only value in `YYYY-MM-DD` format. It represents the club's calendar date and is not a timestamp.
 - `updatedAt` — optional date-only value in `YYYY-MM-DD` format.
 - `summary` — required text, maximum 280 characters.
-- `draft` — boolean, defaults to `true`; drafts are visible only in development and are excluded from production builds.
+- `draft` — boolean, defaults to `true`; drafts are visible in local development and Cloudflare Workers Builds for the `dev` branch. Production builds exclude drafts.
 - `featuredImage` — optional path to an approved image under `public/images/editorial/`.
 - `featuredImageAlt` — required when an image is set; an empty string is allowed for decorative images.
 - `body` — Markdown content.
@@ -51,7 +51,7 @@ Initial schema decisions:
 - `heroImage` — optional path to an approved image under `public/images/editorial/`.
 - `heroImageAlt` — required when an image is set; an empty string is allowed for decorative images.
 - `order` — optional non-negative integer for display ordering.
-- `draft` — boolean, defaults to `true`; drafts are visible only in development and are excluded from production builds.
+- `draft` — boolean, defaults to `true`; drafts are visible in local development and Cloudflare Workers Builds for the `dev` branch. Production builds exclude drafts.
 - `body` — Markdown content.
 
 Use approved, fact-checked content only. This collection can hold any fixed page, including institutional pages.
