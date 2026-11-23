@@ -79,4 +79,5 @@ button:focus-visible {
 	text-align: center;
 	position: fixed;
     right: 0;
+	bottom: 0;
 }

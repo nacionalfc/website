@@ -1,6 +1,6 @@
 media:
   - name: editorial-images
-    label: Imagens editoriais
+    label: Fotos Editoriais
     input: public/images/editorial
     output: /images/editorial
     categories: [image]
@@ -18,7 +18,6 @@ content:
     label: Notícias
     type: collection
     path: src/content/news
-    exclude: [demo-noticia.md, demo-noticia-2.md, demo-noticia-3.md, demo-noticia-4.md]
     format: yaml-frontmatter
     filename: "{primary}.md"
     subfolders: false
@@ -38,6 +37,16 @@ content:
         required: true
         options:
           maxlength: 120
+      - name: summary
+        label: Resumo
+        type: text
+        required: true
+        options:
+          maxlength: 280
+      - name: body
+        label: Conteúdo
+        type: rich-text
+        required: true
       - name: publishedAt
         label: Data de publicação
         type: date
@@ -50,12 +59,6 @@ content:
         default: ""
         options:
           format: yyyy-MM-dd
-      - name: summary
-        label: Resumo
-        type: text
-        required: true
-        options:
-          maxlength: 280
       - name: draft
         label: Rascunho
         type: boolean
@@ -72,10 +75,6 @@ content:
         label: Texto alternativo da imagem
         description: Obrigatório quando houver imagem; deixe vazio se ela for decorativa.
         type: string
-      - name: body
-        label: Conteúdo
-        type: rich-text
-        required: true
         options:
           format: markdown
           media: editorial-images
