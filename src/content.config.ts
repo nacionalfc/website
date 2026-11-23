@@ -2,7 +2,16 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const editorialDate = z.iso.date();
+const editorialDate = z.preprocess(
+	(value) => {
+		if (value instanceof Date && !Number.isNaN(value.getTime())) {
+			return value.toISOString().slice(0, 10);
+		}
+
+		return value;
+	},
+	z.iso.date(),
+);
 
 const news = defineCollection({
 	loader: glob({ base: './src/content/news', pattern: '**/*.md' }),
